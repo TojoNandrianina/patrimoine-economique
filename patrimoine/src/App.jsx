@@ -1,34 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Table from 'react-bootstrap/Table';  
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import Possessions from '../../models/possessions/Possession';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [possessions, setPossessions] = useState([
+    new Possessions("Tojo", "Ordinateur", 5000000, "10 Mars 2023", "25 Decembre 2090", 10),
+    new Possessions("Teji", "Ford Mustang", 10000000, "skdjv", "ksjv", 16)
+  ])
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th className='text-center'>Libelle</th>
+          <th className='text-center'>Valeur Initial</th>
+          <th className='text-center'>Date Debut</th>
+          <th className='text-center'>Date Fin</th>
+          <th className='text-center'>Amortissement</th>
+          <th className='text-center'>Valeur Actuel</th>
+        </tr>
+      </thead>
+      <tbody>
+          {possessions.map((possession, index) => (
+            <tr key={index}>
+              <td className='text-center'>{possession.libelle}</td>
+              <td className='text-center'>sdv</td>
+              <td className='text-center'>sv</td>
+              <td className='text-center'>sdv</td>
+              <td className='text-center'>sdv</td>
+              <td className='text-center'>{Date.now()}</td>
+            </tr>
+          ))}
+      
+      </tbody>
+    </Table>
   )
 }
 
