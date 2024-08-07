@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import Table from 'react-bootstrap/Table';  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -10,15 +10,29 @@ import Button from 'react-bootstrap/Button';
 
 function App() {
   const [dateSelectionnee, setDateSelectionnee] = useState(new Date());
-  const [possessions] = useState([
-    new Possessions("Tojo", "Ordinateur", 5000, new Date("2023-03-10"), new Date("2024-01-02"), 10),
-    new Possessions("Tojo", "Ford Mustang", 10000, new Date("2023-03-10"), new Date("2024-01-02"), 16),
-    new Possessions("Tojo", "Telephone", 2000, new Date("2024-04-11"), new Date("2024-06-12"), 9)
-  ]);
+  const [possessions, setPossessions] = useState([]);
+  const [valeurPatrimoine, setValeurPatrimoine] = useState(null);
+
+  useEffect(() => {
+    fetch('/donne.json')
+      .then(response => response.json())
+      .then(donne => {
+        const loadedPossessions = donne.map(item => 
+          new Possessions(
+            item.possesseur,
+            item.libelle,
+            parseFloat(item.valeur),
+            new Date(item.dateDebut),
+            new Date(item.dateFin),
+            parseFloat(item.tauxAmortissement)
+          )
+        );
+        setPossessions(loadedPossessions);
+      })
+      .catch(error => console.error('Erreur lors du chargement des données:', error));
+  }, []);
   
   const patrimoine = new Patrimoine("Tojo", possessions);
-
-  const [valeurPatrimoine, setValeurPatrimoine] = useState(null);
 
   const calculerValeurPatrimoine = () => {
     const valeur = patrimoine.getValeur(dateSelectionnee);
