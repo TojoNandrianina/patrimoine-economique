@@ -6,12 +6,14 @@ import Possessions from '../../models/possessions/Possession';
 import Patrimoine from '../../models/Patrimoine';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Button from 'react-bootstrap/Button';
 
 function App() {
   const [dateSelectionnee, setDateSelectionnee] = useState(new Date());
   const [possessions] = useState([
     new Possessions("Tojo", "Ordinateur", 5000, new Date("2023-03-10"), new Date("2024-01-02"), 10),
     new Possessions("Tojo", "Ford Mustang", 10000, new Date("2023-03-10"), new Date("2024-01-02"), 16),
+    new Possessions("Tojo", "Telephone", 2000, new Date("2024-04-11"), new Date("2024-06-12"), 9)
   ]);
   
   const patrimoine = new Patrimoine("Tojo", possessions);
@@ -25,7 +27,7 @@ function App() {
 
   return (
     <div>
-      <h1 className="text-center mb-4">Liste des Possessions</h1>
+      <h1 className="text-center mb-5 mt-5 text-primary ">LISTE DES POSSESSIONS</h1>
 
       <Table striped bordered hover>
       <thead>
@@ -53,18 +55,19 @@ function App() {
           ))}
       </tbody>
     </Table>
-    <div className="mb-4">
-        <label>Sélectionner une date:</label>
+    <div className="mb-4 mt-5">
+        <label className='labelStyle'>Sélectionner une date :</label>
         <DatePicker
           selected={dateSelectionnee}
           onChange={(date) => setDateSelectionnee(date)}
           dateFormat="yyyy-MM-dd"
+          className='datePickerStyle'
         />
       </div>
     `<div className="text-center mt-4">
-        <button onClick={calculerValeurPatrimoine} className="btn btn-primary">
-          Calculer Valeur du Patrimoine
-        </button>
+        <Button variant='outline-primary' onClick={calculerValeurPatrimoine}>
+          Calculer valeur patrimoine
+        </Button>
         {valeurPatrimoine !== null && (
           <div className="mt-4">
             <h3>Valeur Totale du Patrimoine</h3>
