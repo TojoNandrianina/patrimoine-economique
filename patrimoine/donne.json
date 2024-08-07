@@ -1,0 +1,27 @@
+[
+    {
+      "possesseur": "Tojo",
+      "libelle": "Ordinateur",
+      "valeur": "5000",
+      "dateDebut": "2023-03-10",
+      "dateFin": "2024-01-02",
+      "tauxAmortissement": "0.6"
+    },
+    {
+      "possesseur": "Tojo",
+      "libelle": "Ford Mustang",
+      "valeur": "10000",
+      "dateDebut": "2023-03-10",
+      "dateFin": "2024-01-02",
+      "tauxAmortissement": "0.8"
+    },
+    {
+      "possesseur": "Tojo",
+      "libelle": "Telepone",
+      "valeur": "1000",
+      "dateDebut": "2023-03-10",
+      "dateFin": "2024-01-02",
+      "tauxAmortissement": "0.3"
+    }
+  ]
+  
