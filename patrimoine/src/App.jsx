@@ -98,22 +98,26 @@ function App() {
         </tbody>
       </Table>
       <div className="mb-4 mt-5">
-        <label className='labelStyle'>Sélectionner une date :</label>
-        <DatePicker
-          selected={dateSelectionnee}
-          onChange={(date) => setDateSelectionnee(date)}
-          dateFormat="yyyy-MM-dd"
-          className='datePickerStyle'
-        />
+        <div>
+          <label className='labelStyle'>Sélectionner une date :</label>
+          <DatePicker
+            selected={dateSelectionnee}
+            onChange={(date) => setDateSelectionnee(date)}
+            dateFormat="yyyy-MM-dd"
+            className='datePickerStyle'
+          />
+        </div>
+        <div>
+          <Button className='buttonCalcule' variant='outline-primary' onClick={calculerValeurPatrimoine}>
+            Calculer valeur patrimoine
+          </Button>
+        </div>
       </div>
-      <div className="text-center mt-4">
-        <Button variant='outline-primary' onClick={calculerValeurPatrimoine}>
-          Calculer valeur patrimoine
-        </Button>
+      <div className="text-center mt-1">
         {valeurPatrimoine !== null && (
-          <div className="mt-4">
-            <h3>Valeur Totale du Patrimoine</h3>
-            <p>{valeurPatrimoine.toFixed(2)}</p>
+          <div className="valeurPat bg-primary">
+            <h3 className='text-white pt-2'>Valeur Totale du Patrimoine :</h3>
+            <p className='text-white'>{valeurPatrimoine.toFixed(2)}</p>
           </div>
         )}
         

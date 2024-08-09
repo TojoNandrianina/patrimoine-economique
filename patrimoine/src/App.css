@@ -18,3 +18,17 @@
     margin-left: 2vw;
     font-size: 1.4rem;
 }
+
+.valeurPat{
+    margin-inline: 30vw;
+    padding-block: 2vh;
+    border-radius: 10px;
+}
+
+.valeurPat p{
+    font-size: 1.3rem;
+}
+
+.buttonCalcule{
+    margin-left: 42vw;
+}
