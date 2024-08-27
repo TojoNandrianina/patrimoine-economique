@@ -32,3 +32,97 @@
 .buttonCalcule{
     margin-left: 42vw;
 }
+
+.titre {
+    font-size: 4rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .titre .ligne {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: rgb(76, 79, 220);
+    margin-top: 10px;
+    transition: width 0.5s ease-in-out;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+  }
+
+  .App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+  }
+  
+  .bubble-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bubble {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: visible;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bubble-text {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+  }
+  
+  .bubble-top-left {
+    top: 10%;
+    left: 20%;
+  }
+  
+  .bubble-bottom-right {
+    bottom: 40%;
+    right: 20%;
+  }
+  
+  .bubble:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  
+  .bubble-top-left .bubble-text-right {
+    text-decoration-line: none;
+    transform: translateX(150%);
+  }
+  
+  .bubble-bottom-right .bubble-text-left {
+    text-decoration: none;
+    transform: translateX(-150%);
+  }
+
+  .font-icon {
+    height: 6vh;
+  }
+
+.font-icon:hover {
+    cursor: pointer;
+}
