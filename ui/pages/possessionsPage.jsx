@@ -8,6 +8,7 @@ import Flux from '../../models/possessions/Flux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 
 const possessionsPage = () => {
@@ -50,7 +51,63 @@ const possessionsPage = () => {
             .catch(error => console.error('Erreur lors du chargement des données:', error));
     }, []);
 
-    const navigateToHome  = () => {
+    const handleClose = async (libelle) => {
+        try {
+            const response = await fetch(`http://localhost:3000/possession/${libelle}/close`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const updatedPossession = await response.json();
+                console.log('Possession closed:', updatedPossession);
+
+                const formatFin = format(new Date())
+
+                setPossessions(prevPossessions =>
+                    prevPossessions.map(possession =>
+                        possession.libelle === libelle ? { ...possession, dateFin: formatFin } : possession
+                    )
+                );
+            } else {
+                const errorData = await response.json();
+                console.error('Close failed:', errorData.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        window.location.reload();
+    };
+
+    const handleDelete = async (libelle) => {
+        try {
+            const response = await fetch(`http://localhost:3000/possession/${libelle}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result.message);
+
+                // Update the state to remove the deleted possession
+                setPossessions(prevPossessions =>
+                    prevPossessions.filter(possession => possession.libelle !== libelle)
+                );
+            } else {
+                const errorData = await response.json();
+                console.error('Delete failed:', errorData.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const navigateToHome = () => {
         navigate('/')
     }
 
@@ -60,6 +117,10 @@ const possessionsPage = () => {
 
     const navigateToUpdatePossessionPage = () => {
         navigate('/possession/:libelle/update')
+    }
+
+    const navigateToEditionPage = (index) => {
+        navigate(`/possession/edit/${index}`)
     }
 
 
@@ -95,8 +156,9 @@ const possessionsPage = () => {
                                 {possession.getValeur(dateOuverture).toFixed(2)} Ariary
                             </td>
                             <td className='text-center'>
-                                <Button variant='primary'>edit</Button>
-                                <Button variant='danger' style={{marginLeft: '10px'}}>cloturer</Button>
+                                <Button onClick={() => navigateToEditionPage(index)} variant='primary'>edit</Button>
+                                <Button onClick={() => handleClose(possession.libelle)} variant='secondary' style={{ marginLeft: '10px' }}>close</Button>
+                                <Button onClick={() => handleDelete(possession.libelle)} variant='danger' style={{marginLeft: '10px'}}>delete</Button>
                             </td>
                         </tr>
                     ))}
@@ -109,7 +171,7 @@ const possessionsPage = () => {
                 </div>
 
                 <div>
-                    <Button onClick={navigateToHome}><FontAwesomeIcon icon={faHouse} className='font-icon'/></Button>
+                    <Button onClick={navigateToHome}><FontAwesomeIcon icon={faHouse} className='font-icon' /></Button>
                 </div>
 
                 <div>
