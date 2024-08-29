@@ -4,6 +4,7 @@ import patrimoine from '../pages/patrimoinePage'
 import possession from '../pages/possessionsPage.jsx'
 import createPossession from '../pages/createPossessions.jsx';
 import updateByLibelle from '../pages/updatePossessionByLibelle.jsx';
+import EditionPage from '../pages/editionPage.jsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/possession' Component={possession}/>
         <Route path='/possession/create' Component={createPossession}/>
         <Route path='/possession/:libelle/update' Component={updateByLibelle}/>
+        <Route path='/possession/edit/:index' Component={EditionPage}/>
       </Routes>
     </Router>
   )
