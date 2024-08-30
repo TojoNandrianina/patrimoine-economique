@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 
 function CreatePossession() {
     // State to hold form values
@@ -40,7 +41,7 @@ function CreatePossession() {
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
-            }else{
+            } else {
                 navigate('/possession')
             }
 
@@ -84,11 +85,12 @@ function CreatePossession() {
                         <Col md={6} className="d-flex flex-column align-items-center">
                             <Form.Group className="mb-3 w-100">
                                 <Form.Label>Beginning date</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter date"
-                                    value={dateDebut}
-                                    onChange={(e) => setDateDebut(e.target.value)}
+                                <DatePicker
+                                    selected={dateDebut}
+                                    onChange={(date) => setDateDebut(date)}
+                                    dateFormat="yyyy-MM-dd"
+                                    className="form-control"
+                                    placeholderText="Select date"
                                 />
                             </Form.Group>
                         </Col>
