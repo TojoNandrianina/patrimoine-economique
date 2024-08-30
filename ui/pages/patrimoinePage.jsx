@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,12 +8,19 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from 'react-bootstrap/Button';
 import Flux from '../../models/possessions/Flux';
+import RadarChart from './RadarChart';
+import axios from "axios";
 
 const patrimoinePage = () => {
   const [dateSelectionnee, setDateSelectionnee] = useState(new Date());
   const [possessions, setPossessions] = useState([]);
   const [valeurPatrimoine, setValeurPatrimoine] = useState(null);
   const [dateOuverture] = useState(new Date());
+
+  const [chartData, setChartData] = useState([]);
+  const [dateDebut, setDateDebut] = useState("");
+  const [dateFin, setDateFin] = useState("");
+  const [type, setType] = useState("jour");
 
   useEffect(() => {
     fetch('/donne.json')
@@ -61,7 +69,24 @@ const patrimoinePage = () => {
     setValeurPatrimoine(valeurTotale);
   };
 
+  const fetchData = async () => {
+    try {
+      console.log("Envoi des données : ", { type, dateDebut, dateFin });
+      const response = await axios.post("http://localhost:3000/patrimoine/range", {
+        type,
+        dateDebut,
+        dateFin,
+      });
+      setChartData(response.data.valeur);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données:", error);
+    }
+  };
 
+  const handleSubmitRange = (e) => {
+    e.preventDefault();
+    fetchData();
+  };
 
   return (
     <div>
@@ -127,6 +152,56 @@ const patrimoinePage = () => {
         )}
 
       </div>
+
+      <div className="container mt-5">
+        <h1 className="text-center text-primary mb-4">Graphe</h1>
+        <form onSubmit={handleSubmitRange} className="row g-3">
+          <div className="col-md-4">
+            <label htmlFor="dateDebut" className="form-label">Date Début:</label>
+            <input
+              id="dateDebut"
+              type="date"
+              className="form-control"
+              value={dateDebut}
+              onChange={(e) => setDateDebut(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="dateFin" className="form-label">Date Fin:</label>
+            <input
+              id="dateFin"
+              type="date"
+              className="form-control"
+              value={dateFin}
+              onChange={(e) => setDateFin(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="type" className="form-label">Type:</label>
+            <select
+              id="type"
+              className="form-select"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="jour">Jour</option>
+              <option value="mois">Mois</option>
+              <option value="année">Année</option>
+            </select>
+          </div>
+          <div className="col-12">
+            <Button className="w-100" variant="outline-primary" type="submit">
+              Générer Graphique
+            </Button>
+          </div>
+        </form>
+        {chartData.length > 0 && (
+          <div className="mt-5">
+            <RadarChart data={chartData} />
+          </div>
+        )}
+      </div>
+
     </div>
   )
 }
