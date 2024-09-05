@@ -8,7 +8,7 @@ export default class Flux extends Possession {
   // Si train de vie => -
   constructor(possesseur, libelle, valeur, dateDebut, dateFin, tauxAmortissement, jour) {
     super(possesseur, libelle, valeur, dateDebut, dateFin, tauxAmortissement)
-    this.valeur = 0;
+    this.valeurA = 0;
     this.jour = jour;
     // this.source = source; // null || Compte
     // this.destination = destination; // Compte
@@ -41,8 +41,8 @@ export default class Flux extends Possession {
 
     // calcul montant total
 
-    this.valeur += nombreDeMois(this.dateDebut, date, this.jour) * this.valeurConstante;
+    this.valeurA += nombreDeMois(this.dateDebut, date, this.jour) * this.valeurConstante;
 
-    return this.valeur;
+    return this.valeurA;
   }
 }
