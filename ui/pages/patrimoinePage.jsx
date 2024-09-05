@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from 'react-bootstrap/Button';
 import Flux from '../../models/possessions/Flux';
-import RadarChart from './RadarChart';
+import BarChart from './BarChart';
 import axios from "axios";
 
 const patrimoinePage = () => {
@@ -197,7 +197,7 @@ const patrimoinePage = () => {
         </form>
         {chartData.length > 0 && (
           <div className="mt-5">
-            <RadarChart data={chartData} />
+            <BarChart data={chartData} />
           </div>
         )}
       </div>
