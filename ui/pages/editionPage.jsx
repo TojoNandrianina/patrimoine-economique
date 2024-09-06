@@ -17,7 +17,7 @@ const EditionPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`https://gestion-de-patrimoine.onrender.com/possession/edit/${index}`, {  // Requête PUT pour l'index
+        fetch(`http://localhost:3000/possession/edit/${index}`, {  // Requête PUT pour l'index
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

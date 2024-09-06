@@ -31,7 +31,7 @@ function CreatePossession() {
         };
 
         try {
-            const response = await fetch('https://gestion-de-patrimoine.onrender.com/possession/create', {
+            const response = await fetch('http://localhost:3000/possession/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

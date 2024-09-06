@@ -72,7 +72,7 @@ const patrimoinePage = () => {
   const fetchData = async () => {
     try {
       console.log("Envoi des données : ", { type, dateDebut, dateFin });
-      const response = await axios.post("https://gestion-de-patrimoine.onrender.com/patrimoine/range", {
+      const response = await axios.post("http://localhost:3000/patrimoine/range", {
         type,
         dateDebut,
         dateFin,

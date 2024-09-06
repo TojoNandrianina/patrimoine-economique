@@ -20,7 +20,7 @@ function UpdateByLibelle() {
         }
 
         try {
-            const response = await fetch(`https://gestion-de-patrimoine.onrender.com/possession/${libelle}`, {
+            const response = await fetch(`http://localhost:3000/possession/${libelle}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
