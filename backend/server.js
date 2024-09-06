@@ -12,7 +12,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-  origin: 'https://gestion-de-patrimoine.onrender.com',
+  origin: 'http://localhost:5173',
   credentials: true
 }));
 app.use(bodyParser.json());
