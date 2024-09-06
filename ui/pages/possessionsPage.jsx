@@ -22,8 +22,7 @@ const possessionsPage = () => {
             .then(data => {
                 console.log("Reponse data from api : " , data);
                 
-                const patrimoineData = { data: { possessions: data } };
-                const loadedPossessions = patrimoineData.possessions.map(item => {
+                const loadedPossessions = data.map(item => {
                     const dateFin = item.dateFin ? new Date(item.dateFin) : null;
                     const tauxAmortissement = item.tauxAmortissement || 0;
 
