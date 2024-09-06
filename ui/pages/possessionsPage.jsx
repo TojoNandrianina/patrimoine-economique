@@ -53,7 +53,7 @@ const possessionsPage = () => {
 
     const handleClose = async (libelle) => {
         try {
-            const response = await fetch(`http://localhost:3000/possession/${libelle}/close`, {
+            const response = await fetch(`https://gestion-de-patrimoine.onrender.com/possession/${libelle}/close`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const possessionsPage = () => {
 
     const handleDelete = async (libelle) => {
         try {
-            const response = await fetch(`http://localhost:3000/possession/${libelle}`, {
+            const response = await fetch(`https://gestion-de-patrimoine.onrender.com/possession/${libelle}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
