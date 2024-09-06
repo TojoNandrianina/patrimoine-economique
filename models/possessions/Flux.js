@@ -19,29 +19,33 @@ export default class Flux extends Possession {
 
 
   getValeur(date) {
-
     const nombreDeMois = (debut, dateEvaluation, jourJ) => {
-        
-        let compteur = 0;
-    
-        if (debut.getDate() < jourJ) {
-            compteur++;
-        }
-        
-        if (dateEvaluation.getDate() >= jourJ && !(debut.getFullYear() === dateEvaluation.getFullYear() && debut.getMonth() === dateEvaluation.getMonth())) {
-            compteur++;
-        }
-        
-        let totalMois = (dateEvaluation.getFullYear() - debut.getFullYear()) * 12 + (dateEvaluation.getMonth() - debut.getMonth()) - 1;
-    
-        compteur += Math.max(0, totalMois);
-    
-        return compteur;
-    }
+      if (dateEvaluation < debut) return 0;
 
-    // calcul montant total
+      // Si la date d'évaluation est après la date de fin, utiliser la date de fin
+      if (this.dateFin && dateEvaluation > this.dateFin) {
+        dateEvaluation = this.dateFin;
+      }
 
-    this.valeurA += nombreDeMois(this.dateDebut, date, this.jour) * this.valeurConstante;
+      let mois = (dateEvaluation.getFullYear() - debut.getFullYear()) * 12 + (dateEvaluation.getMonth() - debut.getMonth());
+
+      // Ajouter un mois si la date d'évaluation est après le jour spécifié du mois
+      if (dateEvaluation.getDate() >= jourJ) {
+        mois++;
+      }
+
+      // Ajuster le mois si la date d'évaluation est avant le jour spécifié
+      if (debut.getDate() > jourJ) {
+        mois--;
+      }
+
+      return mois;
+    };
+
+    const moisEcoules = nombreDeMois(this.dateDebut, date, this.jour);
+
+    // Calcul de la valeur actuelle basée sur le nombre de mois écoulés
+    this.valeurA = moisEcoules * this.valeurConstante;
 
     return this.valeurA;
   }
