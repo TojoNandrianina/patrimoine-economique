@@ -17,7 +17,7 @@ const possessionsPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('/donne.json')
+        fetch('https://patrimoine-economique-l0zb.onrender.com/possession')
             .then(response => response.json())
             .then(data => {
                 const patrimoineData = data.find(item => item.model === "Patrimoine").data;
