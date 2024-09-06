@@ -23,7 +23,7 @@ const patrimoinePage = () => {
   const [type, setType] = useState("jour");
 
   useEffect(() => {
-    fetch('/donne.json')
+    fetch('https://patrimoine-economique-l0zb.onrender.com/possession')
       .then(response => response.json())
       .then(data => {
         const loadedPossessions = data.map(item => {
