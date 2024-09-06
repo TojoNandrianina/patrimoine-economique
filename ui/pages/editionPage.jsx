@@ -17,7 +17,7 @@ const EditionPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/possession/edit/${index}`, {  // Requête PUT pour l'index
+        fetch(`https://patrimoine-economique-l0zb.onrender.com/possession/edit/${index}`, {  // Requête PUT pour l'index
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
