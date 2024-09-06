@@ -20,7 +20,9 @@ const possessionsPage = () => {
         fetch('https://patrimoine-economique-l0zb.onrender.com/possession')
             .then(response => response.json())
             .then(data => {
-                const patrimoineData = data.find(item => item.model === "Patrimoine").data;
+                console.log("Reponse data from api : " , data);
+                
+                const patrimoineData = { data: { possessions: data } };
                 const loadedPossessions = patrimoineData.possessions.map(item => {
                     const dateFin = item.dateFin ? new Date(item.dateFin) : null;
                     const tauxAmortissement = item.tauxAmortissement || 0;
