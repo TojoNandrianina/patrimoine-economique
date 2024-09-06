@@ -26,8 +26,7 @@ const patrimoinePage = () => {
     fetch('/donne.json')
       .then(response => response.json())
       .then(data => {
-        const patrimoineData = data.find(item => item.model === "Patrimoine").data;
-        const loadedPossessions = patrimoineData.possessions.map(item => {
+        const loadedPossessions = data.map(item => {
           const dateFin = item.dateFin ? new Date(item.dateFin) : null;
           const tauxAmortissement = item.tauxAmortissement || 0;
 
